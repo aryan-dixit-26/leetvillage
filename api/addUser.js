@@ -1,6 +1,8 @@
 import { createClient } from "@supabase/supabase-js";
 import { getLeetVillageRank } from "./userData";
-require("dotenv").config({ path: ".env.local" });
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config({ path: ".env.local" });
+}
 
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
