@@ -1,0 +1,261 @@
+/* Center everything */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #e5e5e5;
+  /* light grey backdrop */
+  font-family: 'Courier New', monospace;
+  /* retro feel */
+}
+
+/* Simple card */
+.login-card {
+  background: #f8f8f8;
+  padding: 1.5rem;
+  border: 2px solid #999;
+  border-radius: 4px;
+  /* small radius, not modern round */
+  width: 300px;
+  text-align: center;
+  box-shadow: 2px 2px 0px #aaa;
+  /* hard shadow, old style */
+}
+
+/* Title */
+.login-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  color: #333;
+}
+
+/* Subtitle */
+.login-subtitle {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+/* Input */
+.login-input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #777;
+  background: #fff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+/* Button */
+.login-button {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #555;
+  background: #ddd;
+  color: #000;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.login-button:hover {
+  background: #bbb;
+}
+
+/* General Layout */
+/* General Layout */
+body {
+  margin: 0;
+  background: #e5e5e5;
+  /* light grey backdrop */
+  color: #333;
+  font-family: 'Courier New', monospace;
+  /* retro feel */
+  min-height: 100vh;
+}
+
+/* Dashboard Layout */
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.sticky-panel {
+  position: sticky;
+  top: 1.5rem;
+  align-self: start;
+  height: fit-content;
+}
+
+/* Card Component */
+.card {
+  background: #f8f8f8;
+  color: #000;
+  border-radius: 4px;
+  /* small retro radius */
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #999;
+  box-shadow: 2px 2px 0px #aaa;
+  /* hard old-school shadow */
+}
+
+.card-header {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #222;
+}
+
+.card-content {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Profile Section */
+.profile p {
+  margin: 0.25rem 0;
+}
+
+.profile .font-bold {
+  font-weight: bold;
+}
+
+/* Feed Section */
+.feed {
+  padding-top: 0.5rem;
+  max-height: calc(90vh - 3rem);
+  overflow: scroll;
+}
+
+.feed ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feed li {
+  border-bottom: 1px solid #999;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Leaderboard Section */
+.leaderboard ol {
+  margin: 0;
+  padding-left: 1.25rem;
+  /* list-indent */
+}
+
+.leaderboard li {
+  margin-bottom: 0.25rem;
+}
+
+.leaderboard .score {
+  color: #222;
+  font-weight: bold;
+}
+
+.avatar {
+  width: 50%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+  border: 2px solid #ccc;
+}
+
+.image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Leaderboard Progress Bars */
+.leaderboard {
+  width: 100%;
+}
+
+.leaderboard ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.leaderboard-item {
+  margin-bottom: 1rem;
+}
+
+.leader-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.leader-name {
+  font-weight: bold;
+  color: #222;
+}
+
+.leader-rank {
+  font-style: italic;
+  color: #555;
+}
+
+.leader-score {
+  font-weight: bold;
+  color: #000;
+}
+
+.progress-bar {
+  background: #ddd;
+  border: 1px solid #999;
+  border-radius: 4px;
+  height: 12px;
+  width: 100%;
+  box-shadow: inset 2px 2px 0px #aaa;
+}
+
+.progress-fill {
+  background: #333;
+  height: 100%;
+  border-radius: 4px 0 0 4px;
+  transition: width 0.3s ease;
+}
+
+/* Loader styles */
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* can adjust depending on usage */
+  width: 100%;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 0, 0, 0.2);
+  border-top-color: rgba(0, 0, 0, 0.7); /* slightly blackish */
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
