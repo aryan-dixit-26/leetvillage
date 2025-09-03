@@ -9,7 +9,7 @@ export function Activity({ items, loading }) {
                     <ul>
                         {items.map((item, id) => (
                             <li key={`id-${id}-${item.username}`}>
-                                <p><b>{item.username}</b> just solved <b>{item.questionName}</b></p>
+                                <p><b>{item.username}</b> just solved <b><a href={`https://leetcode.com/problems/${item.questionName}/`}>{item.questionName}</a></b></p>
                                 <small>{new Date(item.timestamp).toLocaleString()}</small>
                             </li>
                         ))}
