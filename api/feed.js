@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     // --- Fetch all users from Supabase ---
     const { data: users, error: usersError } = await supabase
       .from("users")
-      .select("username, leetcode_id");
+      .select("username, leetcode_id, avatar_url");
 
     if (usersError) {
       return res.status(500).json({ error: "Failed to fetch users from Supabase" });
@@ -53,6 +53,7 @@ export default async function handler(req, res) {
           username: user.username,
           questionName: sub.titleSlug,
           timestamp: sub.timestamp * 1000, // convert to milliseconds
+          avatar_url: user.avatar_url,
         }));
       } catch (err) {
         console.error(`Failed fetching submissions for ${user.username}:`, err);
