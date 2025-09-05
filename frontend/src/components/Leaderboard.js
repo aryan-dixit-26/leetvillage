@@ -39,7 +39,18 @@ export function Leaderboard() {
                             return (
                                 <li key={index} className="leaderboard-item">
                                     <div className="leader-info">
-                                        <span className="leader-name">{leader.username}</span>
+                                        <span className="leader-avatar-user">
+                                            <span className="leader-avatar">
+                                                <a href={`https://leetcode.com/u/${leader.username}/`} target="_blank" rel="noreferrer">
+                                                    <img
+                                                        src={leader.avatar_url}
+                                                        alt={`${leader.username} avatar`}
+                                                        className="avatar"
+                                                    />
+                                                </a>
+                                            </span>
+                                            <span className="leader-name">{leader.username}</span>
+                                        </span>
                                         <span className="leader-rank">{leader.rank}</span>
                                         <span className="leader-score">
                                             {leader.problems_solved} / {maxProblems}

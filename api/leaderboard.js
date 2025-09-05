@@ -11,7 +11,7 @@ const supabase = createClient(
 async function getLeaderboard(req, res) {
   const { data, error } = await supabase
     .from("users")
-    .select("username, problems_solved, rank")
+    .select("username, problems_solved, rank, avatar_url")
     .order("problems_solved", { ascending: false });
 
   if (error) {
