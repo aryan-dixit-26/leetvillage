@@ -6,7 +6,7 @@ if (process.env.NODE_ENV !== "production") {
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
 export default async function handler(req, res) {
-  const limitPerUser = 5; // number of recent submissions per user
+  const limitPerUser = 20; // number of recent submissions per user
 
   try {
     // --- Fetch all users from Supabase ---
@@ -65,7 +65,7 @@ export default async function handler(req, res) {
     const allFeedsNested = await Promise.all(feedPromises);
 
     // --- Flatten the array and sort by timestamp (latest first) ---
-    const allFeeds = allFeedsNested.flat().sort((a, b) => b.timestamp - a.timestamp);
+    const allFeeds = allFeedsNested.flat().sort((a, b) => b.timestamp - a.timestamp).slice(0, 25);
 
     // --- Convert timestamp to ISO string for frontend ---
     const formattedFeed = allFeeds.map(item => ({
