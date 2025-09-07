@@ -65,7 +65,7 @@ export default async function handler(req, res) {
     const allFeedsNested = await Promise.all(feedPromises);
 
     // --- Flatten the array and sort by timestamp (latest first) ---
-    const allFeeds = allFeedsNested.flat().sort((a, b) => b.timestamp - a.timestamp);
+    const allFeeds = allFeedsNested.flat().sort((a, b) => b.timestamp - a.timestamp).slice(0, 25);
 
     // --- Convert timestamp to ISO string for frontend ---
     const formattedFeed = allFeeds.map(item => ({
