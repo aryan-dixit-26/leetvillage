@@ -1,5 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { getLeetVillageRank } from "./userData";
+import { hashPassword } from "./utils/auth.js";
+
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config({ path: ".env.local" });
 }
@@ -66,6 +68,9 @@ export default async function handler(req, res) {
 
     const rank = getLeetVillageRank(problems_solved);
 
+    // Hash default password (username)
+    const hashedPassword = await hashPassword(username);
+
     // --- Insert into Supabase ---
     const { data, error } = await supabase
       .from("users")
@@ -76,6 +81,7 @@ export default async function handler(req, res) {
           avatar_url,
           rank,
           problems_solved,
+          password: hashedPassword,
         },
       ])
       .select();

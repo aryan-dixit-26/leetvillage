@@ -1,5 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { getLeetVillageRank } from "./userData";
+import { comparePassword, generateToken } from "./utils/auth.js";
+
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config({ path: ".env.local" });
 }
@@ -49,21 +51,27 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { username } = req.body;
+  const { username, password } = req.body;
 
-  if (!username) {
-    return res.status(400).json({ error: "Username required" });
+  if (!username || !password) {
+    return res.status(400).json({ error: "Username and password required" });
   }
 
-  // check if username exists
+  // Check if username exists and get password
   const { data: user, error } = await supabase
     .from("users")
-    .select("id, username, rank, problems_solved")
+    .select("id, username, rank, problems_solved, password")
     .eq("username", username)
     .single();
 
   if (error || !user) {
-    return res.status(401).json({ error: "User not found" });
+    return res.status(401).json({ error: "Invalid username or password" });
+  }
+
+  // Verify password
+  const isPasswordValid = await comparePassword(password, user.password);
+  if (!isPasswordValid) {
+    return res.status(401).json({ error: "Invalid username or password" });
   }
 
   // --- refresh all users data ---
@@ -93,9 +101,13 @@ export default async function handler(req, res) {
     // don't block login just because refresh failed
   }
 
-  // return user data
+  // Generate JWT token
+  const token = generateToken(user.id, user.username);
+
+  // Return user data with token
   return res.status(200).json({
     message: "Login successful",
     user: { name: user.username },
+    token,
   });
 }
