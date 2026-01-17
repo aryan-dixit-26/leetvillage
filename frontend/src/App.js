@@ -1,6 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./components/Login";
 import Feed from "./components/Feed";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -9,10 +11,18 @@ const router = createBrowserRouter([
   },
   {
     path: "/feed",
-    element: <Feed />,
+    element: (
+      <ProtectedRoute>
+        <Feed />
+      </ProtectedRoute>
+    ),
   },
 ]);
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
 }
