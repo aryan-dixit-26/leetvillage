@@ -74,31 +74,25 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: "Invalid username or password" });
   }
 
-  // --- refresh all users data ---
+  // --- refresh ONLY logging-in user data for speed ---
   try {
-    const { data: allUsers } = await supabase.from("users").select("*");
+    const userData = await fetchLeetCodeData(user.leetcode_id || user.username);
+    if (userData) {
+      const avatar_url = userData.profile.userAvatar || null;
+      const problems_solved =
+        userData.submitStatsGlobal.acSubmissionNum?.find(
+          (s) => s.difficulty === "All"
+        )?.count || 0;
 
-    for (const u of allUsers) {
-      const userData = await fetchLeetCodeData(u.leetcode_id);
+      const rank = getLeetVillageRank(problems_solved);
 
-      if (userData) {
-        const avatar_url = userData.profile.userAvatar || null;
-        const problems_solved =
-          userData.submitStatsGlobal.acSubmissionNum?.find(
-            (s) => s.difficulty === "All"
-          )?.count || 0;
-
-        const rank = getLeetVillageRank(problems_solved);
-
-        await supabase
-          .from("users")
-          .update({ avatar_url, problems_solved, rank })
-          .eq("id", u.id);
-      }
+      await supabase
+        .from("users")
+        .update({ avatar_url, problems_solved, rank })
+        .eq("id", user.id);
     }
   } catch (err) {
-    console.error("Failed to refresh users:", err);
-    // don't block login just because refresh failed
+    console.error("Failed to refresh user data during login:", err);
   }
 
   // Generate JWT token
