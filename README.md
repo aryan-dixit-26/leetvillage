@@ -1,87 +1,78 @@
-# LeetVillage 🏘️
+# leetVillage 🏘️
+> The social hub for LeetCode Shinobis.
 
-LeetVillage is a community dashboard for DSA enthusiasts to track their progress, compete on leaderboards, and see real-time activity from fellow "villagers."
+**leetVillage** is a social competitive platform designed to make the lonely grind of Data Structures and Algorithms (DSA) more interactive and community-driven. It transforms LeetCode stats into a "Village" ecosystem where you can track progress, compete with peers, and stay motivated together.
 
-## 🚀 Features
+---
 
-- **Personalized Profiles**: Track your LeetCode problem count and "Village Rank."
-- **Live Activity Feed**: See which problems other users are solving in real-time.
-- **Global Leaderboard**: Compete with others based on total solved problems.
-- **Secure Authentication**: Protected pages with JWT-based auth and password management.
-- **Retro Aesthetic**: Modern functionality with a classic terminal/retro inspired design.
+## ✨ Features
 
-## 🛠️ Tech Stack
+### 🏯 The Great Hall (Leaderboard)
+Compete for the title of the Village Head. The leaderboard ranks users based on their total solved problems, providing a clear competitive edge to your daily practice.
 
-- **Frontend**: React, React Router, Vanilla CSS.
-- **Backend**: Node.js (Vercel Serverless Functions).
-- **Database**: Supabase (PostgreSQL).
-- **External API**: LeetCode GraphQL API.
-- **Auth**: JWT (jsonwebtoken), Password hashing (bcryptjs).
+### 📜 Digital Scroll (Activity Feed)
+Stay in the loop with the digital scroll. See real-time updates as your fellow villagers solve problems, complete challenges, and level up. Never miss a beat in the village's collective growth.
 
-## 💻 Local Setup
+### 👤 Shinobi Dossier (Profiles)
+Your personal progress card. Display your total solved count, global rank, and unique avatar. It's your identity within the village.
 
-1. **Clone the repository**:
-   ```bash
-   git clone <repo-url>
-   cd leetvillage
-   ```
+### 🔐 Secure Sanctuary (Authentication)
+Integrated login system using JWT and hashed passwords. Securely manage your account and protect your progress with built-in password management.
 
-2. **Install dependencies**:
-   ```bash
-   # Root directory
-   npm install
-   # Frontend directory
-   cd frontend && npm install
-   cd ..
-   ```
+---
 
-3. **Environment Variables**:
-   Create a `.env.local` file in the root directory:
-   ```env
-   SUPABASE_URL=your_supabase_url
-   SUPABASE_KEY=your_supabase_anon_key
-   JWT_SECRET=your_random_secret_key
-   ```
+## 🛠️ Tech Architecture
 
-4. **Database Setup**:
-   Run the following SQL in your Supabase SQL Editor:
-   ```sql
-   ALTER TABLE users ADD COLUMN IF NOT EXISTS password TEXT;
-   ```
+leetVillage is built with a modern, serverless focus for high scalability and low maintenance:
 
-5. **Run the App**:
-   Using Vercel CLI (recommended for full API support):
-   ```bash
-   npx vercel dev
-   ```
-   Or run frontend only (requires deployed API):
-   ```bash
-   cd frontend && npm start
-   ```
+- **Frontend**: A lightning-fast **React** SPA styled with a custom terminal-retro aesthetic (Vanilla CSS).
+- **Backend API**: **Node.js** serverless functions hosted on **Vercel**, ensuring zero cold-start latency for core flows.
+- **Persistence**: **Supabase** (PostgreSQL) handles user data, auth state, and leaderboard rankings.
+- **Data Synchronization**: Automated sync with the **LeetCode GraphQL API** to keep village stats fresh.
 
-6. **Initial Migration**:
-   To set default passwords (username as password) for existing users:
-   ```bash
-   node api/migrations/addPasswordField.js
-   ```
+---
 
-## 📂 Project Structure
+## 🚀 Getting Started
 
-- `/api`: Vercel serverless functions (backend logic).
-- `/api/utils`: Shared backend utilities (auth, etc).
-- `/api/migrations`: Database scripts.
-- `/frontend`: React application.
-- `/frontend/src/components`: UI components.
-- `/frontend/src/context`: React Context providers (Auth).
+### 1. Prerequisites
+- Node.js (v18+)
+- Vercel CLI (`npm install -g vercel`)
+- A Supabase Project
 
-## 🛡️ Authentication
+### 2. Setup
+```bash
+# Clone and Install
+git clone https://github.com/your-username/leetVillage.git
+cd leetVillage
+npm install
+cd frontend && npm install && cd ..
 
-LeetVillage uses JWT for secure sessions. Tokens are stored in `localStorage` and verified on page load. Existing users can login using their username as their initial password and should change it via the Profile panel immediately.
+# Environment Setup
+# Create .env.local in root with:
+# SUPABASE_URL=...
+# SUPABASE_KEY=...
+# JWT_SECRET=...
+```
 
-## 📈 Performance Optimization
+### 3. Launching the Village
+```bash
+# Start the full environment (API + Frontend)
+vercel dev
+```
 
-The login flow is optimized to only refresh data for the authenticated user, ensuring sub-second response times even as the user base grows.
+---
 
-## 📄 License
+## 🗺️ Project Roadmap
 
-ISC
+- [ ] **Shinobi Sparring**: Head-to-head DSA challenges.
+- [ ] **Clans**: Group-based leaderboards and private feeds.
+- [ ] **Skill Badges**: Achievement-based icons for specific tag streaks (e.g., "DP Master").
+- [ ] **Mobile App**: A companion PWA for on-the-go tracking.
+
+---
+
+## 🛡️ License
+Distributed under the ISC License. See `LICENSE` for more information.
+
+---
+*Built with ❤️ by and for the LeetCode community.*
